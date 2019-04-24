@@ -1,0 +1,33 @@
+const http = require('http');
+
+let request_counter = 0;
+
+const server = http.createServer((request, response) => {
+  response.writeHead(200, {
+    'Content-type': 'text/html',
+    'Alumnos-HACKABOS': 'xente guai'
+  });
+
+  if (request.url === '/berto') {
+    request_counter = request_counter + 1;
+
+    response.end(`
+      <html>
+        <head>
+          <meta charset="utf-8">
+          <title>Páxina de berto</title>
+        </head>
+        <body>
+          <h1>Hola berto! 😍</h1>
+          <a href="/">volver á portada</a><br>
+          <img src="https://pbs.twimg.com/profile_images/773510116364656640/Epf7sJlL_400x400.jpg">
+          <p>Esta é a petición número: ${request_counter}</p>
+        </body>
+      </html>
+    `);
+  } else {
+    response.end('esta é a portada!');
+  }
+});
+
+server.listen(8000);
